@@ -1,0 +1,23 @@
+DROP TABLE IF EXISTS posts;
+
+CREATE TABLE posts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    firstname TEXT NOT NULL,
+    lastname TEXT NOT NULL,
+    grade INT NOT NULL
+);
+
+CREATE TABLE classes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    className TEXT NOT NULL,
+    periodOne BOOL NOT NULL,
+    periodTwo BOOL NOT NULL,
+    periodThree BOOL NOT NULL,
+    periodFour BOOL NOT NULL,
+    periodFive BOOL NOT NULL,
+    periodSix BOOL NOT NULL,
+    periodSeven BOOL NOT NULL,
+    periodEight BOOL NOT NULL
+);
