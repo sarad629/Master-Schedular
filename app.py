@@ -1,13 +1,19 @@
-from flask import Flask, request, render_template, flash
+from flask import Flask, request, render_template
 import sqlite3
 
 app = Flask(__name__)
-app.secret_key = 'fsdajlkjalasjlfdslj'
+app.secret_key = 'fs214353daj23lkj341al3124asj48u231o812u4o1l4312fds43lj'
 
 
-@app.route("/")
-def startingPage():
-    return render_template('home.html')
+def get_classes():
+    classes = set()
+
+    conn = sqlite3.connect('database.db')
+    cur = conn.cursor()
+    table = cur.execute('SELECT * FROM classes')
+    for row in table:
+        classes.add(row[2])
+    return classes
 
 
 def get_db_connection():
@@ -16,9 +22,14 @@ def get_db_connection():
     return conn
 
 
-@app.route("/completed", methods=["POST", "GET"])
-def Userinputs():
+@app.route("/")
+def starting_page():
+    ordinals = ['First', 'Second', 'Third', 'Fourth', 'Fifth']
+    return render_template('home.html', classes=get_classes(), ordinals=ordinals)
 
+
+@app.route("/completed", methods=["POST", "GET"])
+def user_inputs():
     if request.method == "POST":
         firstname = request.form.get('First Name')
         lastname = request.form.get('Last Name')
@@ -28,7 +39,6 @@ def Userinputs():
 
         conn.commit()
         conn.close()
-
 
     return render_template('completed.html')
 

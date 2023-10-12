@@ -4,20 +4,19 @@ CREATE TABLE posts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     firstname TEXT NOT NULL,
-    lastname TEXT NOT NULL,
-    grade INT NOT NULL
+    lastname TEXT NOT NULL
 );
 
 CREATE TABLE classes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    className TEXT NOT NULL,
-    periodOne BOOL NOT NULL,
-    periodTwo BOOL NOT NULL,
-    periodThree BOOL NOT NULL,
-    periodFour BOOL NOT NULL,
-    periodFive BOOL NOT NULL,
-    periodSix BOOL NOT NULL,
-    periodSeven BOOL NOT NULL,
-    periodEight BOOL NOT NULL
+    class TEXT NOT NULL,
+    period1 INTEGER NOT NULL,
+    period2 INTEGER NOT NULL,
+    period3 INTEGER NOT NULL,
+    period4 INTEGER NOT NULL,
+    period5 INTEGER NOT NULL,
+    period6 INTEGER NOT NULL,
+    period7 INTEGER NOT NULL,
+    period8 INTEGER NOT NULL
 );
