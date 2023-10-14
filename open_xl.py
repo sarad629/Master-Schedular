@@ -9,7 +9,7 @@ def get_db_connection():
 
 
 def open_class_list():
-    path = "/Users/Archith/Downloads/Class_list.xlsx"
+    path = "/Users/saradevries/Downloads/Class_list.xlsx"
     df = pd.read_excel(path)
 
     for row in range(0, len(df)):

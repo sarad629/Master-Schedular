@@ -1,11 +1,12 @@
-<!DOCTYPE html>
+{% extends "template.html" %}
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>form</title>
-</head>
-<body>
+{% block head %} 
+    <meta charset="UTF-8"> 
+{% endblock %}
+
+    {% block title %} Home {% endblock %}
+
+{% block content %}
     <form action="http://127.0.0.1:5000/completed" method="POST">
         <label for="First Name">First Name:</label><br>
         <input type="text" id="First Name" name="First Name" placeholder="first name"><br>
@@ -24,6 +25,5 @@
         {% endfor %}
         <input type="submit" value="Submit">
     </form>
-</body>
 
-</html>
+{% endblock %}

@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, url_for
 import sqlite3
 
 app = Flask(__name__)
@@ -42,6 +42,9 @@ def user_inputs():
 
     return render_template('completed.html')
 
+@app.errorhandler(404)
+def pnf(placeholder):
+    return render_template('pnf.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
