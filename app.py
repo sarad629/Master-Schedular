@@ -24,7 +24,7 @@ def get_db_connection():
 @app.route("/")
 def starting_page():
     ordinals = ['First', 'Second', 'Third', 'Fourth', 'Fifth']
-    return render_template('home.html', classes=get_classes(), ordinals=ordinals)
+    return render_template("home.html", classes=get_classes(), ordinals=ordinals)
 
 
 @app.route("/completed", methods=["POST", "GET"])
@@ -50,11 +50,11 @@ def user_inputs():
     else:
         return "Invalid action, return to last page", 400
 
-    return render_template('completed.html', status=userStatus, firstname=firstname, lastname=lastname, grade=grade, o1=o1, o2=o2, o3=o3, o4=o4, o5=o5)
+    return render_template("completed.html", status=userStatus, firstname=firstname, lastname=lastname, grade=grade, o1=o1, o2=o2, o3=o3, o4=o4, o5=o5)
 
 @app.errorhandler(404)
 def pnf(placeholder):
-    return render_template('pnf.html')
+    return render_template("pnf.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

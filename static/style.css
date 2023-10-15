@@ -1,0 +1,23 @@
+/* 
+    ! https://coolors.co/palette/0d1321-1d2d44-3e5c76-748cab-f0ebd8
+    https://coolors.co/palette/0a0908-22333b-eae0d5-c6ac8f-5e503f
+    
+    Color palette */
+
+:root {
+    --background: #0D1321;
+    --primary: ;
+    --secondary: ;
+    --tertiary: ;
+    --special: ;
+    --white: #FFFFFF;
+}
+
+body {
+    background-color: var(--background);
+    width: 100vw;
+    height: 100vh;
+    overflow-y:hidden; 
+    overflow-x: auto;
+    color: var(--white)
+}

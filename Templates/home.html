@@ -7,7 +7,7 @@
     {% block title %} Home {% endblock %}
 
 {% block content %}
-    <form action="http://127.0.0.1:5000/completed" method="POST">
+    <form action="/completed" method="POST" class="input-form">
         <label for="First Name">First Name:</label><br>
         <input type="text" id="First Name" name="First Name" placeholder="first name"><br>
         <label for="Last Name">Last Name:</label><br>
@@ -15,7 +15,7 @@
         <label for="Grade"> Grade </label> <br>
         <input type="text" id="Grade" name="Grade" placeholder="6"> <br>
         {% for ordinal in ordinals %}
-            <label for="{{ordinal}} Choice">{{ordinal}} Choice</label> <br>
+            <label for="{{ordinal}} Choice"> {{ordinal}} Choice</label> <br>
             <select id="{{ordinal}} Choice" name="{{ordinal}} Choice" >
                 <option value="none" selected disabled hidden>Select an option</option>
                 {% for class in classes %}
