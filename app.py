@@ -1,8 +1,8 @@
-from flask import Flask, request, render_template, url_for
+from flask import Flask, request, render_template, url_for, session, redirect
 import sqlite3
 
 app = Flask(__name__)
-app.secret_key = 'fs214353daj23lkj341al3124asj48u231o812u4o1l4312fds43lj'
+app.secret_key = '2.zdz0X`;U31#ow3!IH[GfG`uSnvSls;,"%oI*%3h_KLbq0n?k|#/:K"?kz9<}.'
 
 
 def get_classes():
@@ -24,7 +24,25 @@ def get_db_connection():
 @app.route("/")
 def starting_page():
     ordinals = ['First', 'Second', 'Third', 'Fourth', 'Fifth']
-    return render_template("home.html", classes=get_classes(), ordinals=ordinals)
+    
+    if "username" in session:
+        return render_template("home.html", classes=get_classes(), ordinals=ordinals)
+    else:
+        return redirect("/login", code=302)
+    
+@app.route('/login')
+def login():
+    if "username" not in session:
+        
+        return render_template("login.html")
+        #Add code to check if user exists and if they are an administrator, use session for student/admin accnt
+    else:
+        return redirect("/", code=302)
+    
+def user_exists(username, password):
+    print(e)
+    #Addd functiont o check if user exists, other wise deny access
+    
 
 
 @app.route("/completed", methods=["POST", "GET"])

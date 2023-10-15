@@ -1,0 +1,17 @@
+{% extends "template.html" %}
+
+{% block title %} Log In {% endblock %}
+
+{% block content %}
+<form action="/home.html" method="POST" class="login">
+    <label>Username</label>
+    <input type="text" id="username" name="username">
+
+    <label>Password</label>
+    <input type="text" id="password" name="password">
+
+    <input type="submit" id="log-in-btn" name="log-in-btn">
+
+</form>
+
+{% endblock %}
