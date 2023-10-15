@@ -21,7 +21,6 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
-
 @app.route("/")
 def starting_page():
     ordinals = ['First', 'Second', 'Third', 'Fourth', 'Fifth']
@@ -33,14 +32,25 @@ def user_inputs():
     if request.method == "POST":
         firstname = request.form.get('First Name')
         lastname = request.form.get('Last Name')
+        
+        grade = request.form["Grade"]
+        o1 = request.form["First Choice"]
+        o2 = request.form["Second Choice"]
+        o3 = request.form["Third Choice"]
+        o4 = request.form["Fourth Choice"]
+        o5 = request.form["Fifth Choice"]
 
         conn = get_db_connection()
         conn.execute('INSERT INTO posts (firstname, lastname) VALUES (?, ?)', (firstname, lastname))
 
         conn.commit()
         conn.close()
+        userStatus = True
+        
+    else:
+        return "Invalid action, return to last page", 400
 
-    return render_template('completed.html')
+    return render_template('completed.html', status=userStatus, firstname=firstname, lastname=lastname, grade=grade, o1=o1, o2=o2, o3=o3, o4=o4, o5=o5)
 
 @app.errorhandler(404)
 def pnf(placeholder):

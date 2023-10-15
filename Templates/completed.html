@@ -3,5 +3,17 @@
 {% block title %}Completed {% endblock %}
 
 {% block content %}
-    <p>Classes Uploaded</p>
+<div class="submission">
+
+    {% if status %} 
+    <p>Name : {{ firstname }} {{lastname}}</p>
+    <p>Grade : {{ grade }}</p>
+    <p>Choice 1 : {{o1}}</p>
+    <p>Choice 2 : {{o2}}</p>
+    <p>Choice 3 : {{o3}}</p>
+    <p>Choice 4 : {{o4}}</p>
+    <p>Choice 5 : {{o5}}</p>
+    {% endif %}
+</div>
+
 {% endblock %}
