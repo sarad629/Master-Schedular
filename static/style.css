@@ -6,18 +6,80 @@
 
 :root {
     --background: #0D1321;
-    --primary: ;
-    --secondary: ;
-    --tertiary: ;
-    --special: ;
-    --white: #FFFFFF;
+    --tertiary: #748CAB;
+    --secondary: #3E5C76;
+    --primary: #1D2D44;
+    --special: #F0EBD8;
+    --alert: #9fd1cf;
 }
 
 body {
     background-color: var(--background);
     width: 100vw;
     height: 100vh;
-    overflow-y:hidden; 
-    overflow-x: auto;
-    color: var(--white)
+    color: white;
+    font-family: 'Gabarito', sans-serif;;
 }
+
+.input-form {
+    margin: auto;
+    position:absolute;
+
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+    padding:15px;
+    border-radius: 20px;
+    background-color:var(--primary);
+    color:white;
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    width: 50%;
+    height: fit-content;
+
+}
+
+.input-form input, select {
+    width:500px;
+    height:fit-content;
+    margin:auto;
+    font-size:12pt;
+    border-radius:5px;
+    padding: 3px;
+}
+
+.input-form input::placeholder {
+    color:black;
+}
+
+#submit-btn {
+    background-color:var(--tertiary);
+    color:white;
+}
+
+#submit-btn:hover {
+    height:35px;
+    background-color:var(--secondary);
+}
+
+#schedule-header{
+    margin: auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:5px;
+}
+
+.input-form label {
+    padding: 3px;
+    font-size: 14pt;
+}
+

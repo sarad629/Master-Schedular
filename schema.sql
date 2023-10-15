@@ -20,3 +20,11 @@ CREATE TABLE classes (
     period7 INTEGER NOT NULL,
     period8 INTEGER NOT NULL
 );
+
+CREATE TAbLE IF NOT EXISTS users {
+    id PRiMARY KEY AUTOINCREMENT,
+    username TINYTEXT NOT NULL,
+    password TINYTEXT NOT NULL,
+    hierarchy TINYTEXT NOT NULL,
+    school TINYTEXT NOT NULL
+}

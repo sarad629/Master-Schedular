@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% block head %} {% endblock %}
+    
     <head>
-
+        {% block head %} {% endblock %}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Gabarito&display=swap" rel="stylesheet">
+        
         <title>{%block title %} {% endblock %}</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
         

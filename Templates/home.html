@@ -7,23 +7,27 @@
     {% block title %} Home {% endblock %}
 
 {% block content %}
+
+    {% if adminStatus %}
+    <h1 id="schedule-header">Create a Schedule</h1>
     <form action="/completed" method="POST" class="input-form">
-        <label for="First Name">First Name:</label><br>
-        <input type="text" id="First Name" name="First Name" placeholder="first name"><br>
-        <label for="Last Name">Last Name:</label><br>
-        <input type="text" id="Last Name" name="Last Name" placeholder="last name"><br>
-        <label for="Grade"> Grade </label> <br>
-        <input type="text" id="Grade" name="Grade" placeholder="6"> <br>
+        <label for="First Name">First Name:</label>
+        <input type="text" id="First Name" name="First Name" placeholder="First Name" required>
+        <label for="Last Name">Last Name:</label>
+        <input type="text" id="Last Name" name="Last Name" placeholder="Last Name" required>
+        <label for="Grade"> Grade </label> 
+        <input type="text" id="Grade" name="Grade" placeholder="Select Grade Level" required> 
         {% for ordinal in ordinals %}
-            <label for="{{ordinal}} Choice"> {{ordinal}} Choice</label> <br>
-            <select id="{{ordinal}} Choice" name="{{ordinal}} Choice" >
-                <option value="none" selected disabled hidden>Select an option</option>
+            <label for="{{ordinal}} Choice"> {{ordinal}} Choice</label> 
+            <select id="{{ordinal}} Choice" name="{{ordinal}} Choice" required>
+                <option value="none" selected disabled hidden>Select a class</option>
                 {% for class in classes %}
                     <option value={{class}}> {{class}} </option>
                 {% endfor %}
-            </select> <br>
+            </select> 
         {% endfor %}
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" id="submit-btn">
     </form>
+    {% endif %}
 
 {% endblock %}
