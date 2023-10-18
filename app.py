@@ -100,6 +100,11 @@ def signup():
 def profile():
     return render_template("profile.html")
                                
+def get_user_id(username, password):
+    conn = get_db_connection()
+    
+    result = conn.execute("SELECT user_id FROM users WHERE username='%s' AND PASSWORD='%s'" % (username, password))
+    return result.fetchone() is not None    
     
 def user_exists(username, password):
     conn = get_db_connection()
@@ -151,6 +156,11 @@ def user_inputs():
         
     else:
         return "Invalid action, return to last page", 400
+    
+def check_hierarchy(username, password):
+    conn = get_db_connection()
+    result = conn.execute("SELECT hierarchy FROM user WHERE username = '%s' AND password = '%s" % (username, password))
+    return result.fetchone() is not None
 
 @app.errorhandler(404)
 def pnf(placeholder):
