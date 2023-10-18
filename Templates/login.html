@@ -3,14 +3,16 @@
 {% block title %} Log In {% endblock %}
 
 {% block content %}
-<form action="/home.html" method="POST" class="login">
+<form action="{{url_for('login')}}" method="POST" class="login">
     <label>Username</label>
-    <input type="text" id="username" name="username">
+    <input type="text" id="username" name="username" required>
 
     <label>Password</label>
-    <input type="text" id="password" name="password">
+    <input type="password" id="password" name="password" required>
 
     <input type="submit" id="log-in-btn" name="log-in-btn">
+
+    
 
 </form>
 

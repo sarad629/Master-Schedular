@@ -1,9 +1,9 @@
 from flask import Flask, request, render_template, url_for, session, redirect
 import sqlite3
+from init_db import init_db
 
 app = Flask(__name__)
 app.secret_key = '2.zdz0X`;U31#ow3!IH[GfG`uSnvSls;,"%oI*%3h_KLbq0n?k|#/:K"?kz9<}.'
-
 
 def get_classes():
     classes = set()
@@ -21,44 +21,100 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+@app.route("/schedule-management")
+def schedule_management():
+    if "username" in session:
+        adminStatus = True
+        classes = get_classes()
+        ordinals = ['First', 'Second', 'Third', 'Fourth', 'Fifth']
+        return render_template("schedule-management.html", classes=classes, ordinals=ordinals, adminStatus=adminStatus)
+
+    else:
+        session['loginStatus'] = "Login to create Tasks"
+        return redirect("/login")
+    
 @app.route("/")
-def starting_page():
-    ordinals = ['First', 'Second', 'Third', 'Fourth', 'Fifth']
-    adminStatus = True
-    return render_template("home.html", classes=get_classes(), ordinals=ordinals, adminStatus=adminStatus)
+def home():
+    return render_template("home.html")
 
     
-@app.route('/login')
+@app.route('/login', methods=['POST', 'GET'])
 def login():
-    if "username" not in session:
-        return render_template("login.html")
-
+    #Fix this hole shit hole
+    if "username" in session:
+        username = session["username"]
+        return redirect("/profile")
+    
+    else:
+        if request.method == "POST":
+            if "username" in request.form and "password" in request.form:
+                username = request.form.get('username')
+                password = request.form.get('password')
+        
+                if user_exists(username, password):
+                    session.pop("loginStatus", None)
+                    session["username"] = username
+                    return redirect("/profile")
+                else:
+                    return "User does not exist, go to sign up page", 400
+            
+            else:
+                return render_template("login.html", code="302")
+            
+        else:
+            return render_template("login.html")
+        
+@app.route("/signup", methods=["POST", "GET"])
+def signup():
+    if "username" in session:
+        username = request.form.get('username')
+        session["username"] = username
+        return redirect("/profile")
+    
+    else: 
+        if request.method == "POST":
+            if "username" in request.form and "password" in request.form and "school" in request.form:
+                username = request.form.get('username')
+                password = request.form.get('password')
+                school = request.form.get('school')
+                
+                if user_exists(username, password):
+                    return "User already exists, go to login page", 400
+                else:
+                    if "hierarchy" in request.form:
+                        hierarchy = request.form.get('hierarchy')
+                        create_user(username, password, hierarchy, school)
+                        session["username"] = username
+                        
+                        return redirect('/profile', code=300)
+                    
+                    else:
+                        return render_template("signup.html")
+            else:
+                return render_template("signup.html")
+        
+        else:
+            return render_template("signup.html")  
+            
+@app.route("/profile", methods=["GET", "POST"])
+def profile():
+    return render_template("profile.html")
+                               
     
 def user_exists(username, password):
     conn = get_db_connection()
     
-    result = conn.execute("SELECT user_id FROM users WHERE username='%s' AND PASSWORD='%s'" % (username, password))
-    user_id = result.fetchone()[0]
-    
-    result = conn.execute("SELECT username FROM users WHERE username='%s' AND PASSWORD='%s' AND user_id=%d" % (username, password, user_id))
+    result = conn.execute("SELECT username FROM users WHERE username='%s' AND PASSWORD='%s'" % (username, password))
+    return result.fetchone() is not None
 
-    if result is not None:
-        return True
-    else: 
-        return False
-    #Addd functiont o check if user exists, other wise deny access
     
-def create_user(username, password, hierarchy):
+def create_user(username, password, hierarchy, school):
     conn = get_db_connection()
     
-    if (user_exists != True):
-        result = conn.execute("INSERT INTO users (username, password, hierarchy) VALUES (?, ?, ?)", (username, password, hierarchy))
-        conn.commit()
-        conn.close()
-    else:
-        return "User already exists"
-    
+    result = conn.execute("INSERT INTO users (username, password, hierarchy, school) VALUES (?, ?, ?, ?)", (username, password, hierarchy, school))
+    conn.commit()
     conn.close()
+
 
 def delete_user(username, password):
     conn = get_db_connection()

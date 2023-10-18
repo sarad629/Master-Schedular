@@ -1,15 +1,12 @@
 import sqlite3
+from tables import initialize_tables
 
 """
 Program Initializes database but does not need to run each time app is run
 """
-
-connection = sqlite3.connect('database.db')
-
-with open('schema.sql') as f:
-    connection.executescript(f.read())
-
-cur = connection.cursor()
-
-connection.commit()
-connection.close()
+def init_db():
+    connection = sqlite3.connect('database.db')
+    cur = connection.cursor()
+    initialize_tables()
+    connection.commit()
+    connection.close()

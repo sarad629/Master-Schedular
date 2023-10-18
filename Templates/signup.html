@@ -1,0 +1,26 @@
+{% extends "template.html" %}
+
+{% block title %} Sign Up {% endblock %}
+
+{% block content %}
+<form action="{{url_for('signup')}}" method="POST" class="signup">
+    <label>Username</label>
+    <input type="text" id="username" name="username" required>
+
+    <label>Password</label>
+    <input type="password" id="password" name="password" required>
+
+    <label>School</label>
+    <input type="text" id="school" name="school" required>
+
+    <label>Hierarchy Type</label>
+    <select id="hierarchy" name="hierarchy" required>
+        <option name="admin">Admin</option>
+        <option name="non-admin">Non-Admin</option>
+    </select>
+
+    <input type="submit" id="sign-up-btn" name="sign-up-btn">
+
+</form>
+
+{% endblock %}
